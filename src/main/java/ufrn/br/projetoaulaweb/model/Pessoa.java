@@ -20,8 +20,8 @@ import org.hibernate.envers.Audited;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)  //por classe contreta
 
 public abstract class Pessoa extends AbstractEntity {
-    @NotBlank(message = "Nome é obrigatório")
     //@Size(min = 3, max = 40)
+    @NotBlank(message = "Nome é obrigatório")
     String nome;
     @Email(message = "Email inválido")
     String email;

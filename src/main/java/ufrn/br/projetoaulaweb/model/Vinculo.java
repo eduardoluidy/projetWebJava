@@ -1,7 +1,9 @@
 package ufrn.br.projetoaulaweb.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import ufrn.br.projetoaulaweb.model.generic.AbstractEntity;
 
@@ -17,9 +19,11 @@ import java.util.List;
 @Setter
 @ToString
 @Audited
+@AuditTable(value = "vinculo_aud")
 public class Vinculo extends AbstractEntity {
 
     private Long id;
+    //@JsonFormat(pattern = "dd/MM/yyyy")
     Date dataAdmissao;
     @NotBlank(message = "Cargo é obrigatório")
     String cargo;
@@ -34,7 +38,6 @@ public class Vinculo extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "servidor_id")
     ) */
     @ManyToMany(mappedBy = "vinculos")
-    //@ToString.Exclude
     @JsonIgnore
     List<Servidor> servidores;
 

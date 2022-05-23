@@ -1,6 +1,7 @@
 package ufrn.br.projetoaulaweb.model;
 
 import lombok.*;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import ufrn.br.projetoaulaweb.model.generic.AbstractEntity;
 
@@ -14,13 +15,10 @@ import java.io.Serializable;
 @Setter
 @ToString
 @Audited
+@AuditTable(value = "pessoa_juridica_aud")
 public class PessoaJuridica extends Pessoa {
-    //@Column(nullable = false, length = 11)
+    @Column(nullable = false, unique = true)
     String cnpj;
 
-
-   // @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "endereco_id")
-   // Endereco endereco;
 
 }

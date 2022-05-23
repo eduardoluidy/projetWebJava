@@ -1,20 +1,22 @@
 package ufrn.br.projetoaulaweb.model;
 
 import lombok.*;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
-import ufrn.br.projetoaulaweb.model.generic.AbstractEntity;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Audited
+@AuditTable(value = "pessoa_fisica_aud")
 public class PessoaFisica extends Pessoa {
-    @Column(nullable = false, length = 11)
+    //@Column(nullable = false, unique = true)
     String cpf;
     @Column(nullable = false)
     String rg;
@@ -27,5 +29,8 @@ public class PessoaFisica extends Pessoa {
     )
     List<Deficiencia> deficiencias;
 
+    public PessoaFisica(String nome, String email, String telefone, String cpf, String rg, Endereco endereco, List<Deficiencia> deficiencias) {
+        this();
+    }
 }
 

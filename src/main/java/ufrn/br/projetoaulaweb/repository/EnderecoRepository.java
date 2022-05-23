@@ -1,9 +1,9 @@
 package ufrn.br.projetoaulaweb.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ufrn.br.projetoaulaweb.model.Endereco;
-import ufrn.br.projetoaulaweb.repository.generic.GenericRepository;
 
 @Repository
-public interface EnderecoRepository extends GenericRepository<Endereco> {
+public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 }

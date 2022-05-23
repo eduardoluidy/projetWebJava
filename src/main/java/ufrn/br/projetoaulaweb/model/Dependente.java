@@ -3,6 +3,7 @@ package ufrn.br.projetoaulaweb.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import ufrn.br.projetoaulaweb.model.generic.AbstractEntity;
 
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @Audited
+@AuditTable(value = "dependente_aud")
 public class Dependente extends AbstractEntity {
 
     String nome;

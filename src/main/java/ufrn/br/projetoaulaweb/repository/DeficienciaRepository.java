@@ -1,9 +1,10 @@
 package ufrn.br.projetoaulaweb.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ufrn.br.projetoaulaweb.model.Deficiencia;
-import ufrn.br.projetoaulaweb.repository.generic.GenericRepository;
 
 @Repository
-public interface DeficienciaRepository extends GenericRepository<Deficiencia> {
+public interface DeficienciaRepository extends JpaRepository<Deficiencia, Long> {
+
 }

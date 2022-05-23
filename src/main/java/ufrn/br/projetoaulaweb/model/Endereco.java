@@ -2,6 +2,7 @@ package ufrn.br.projetoaulaweb.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import ufrn.br.projetoaulaweb.model.generic.AbstractEntity;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Audited
+@AuditTable(value = "endereco_aud")
 public class Endereco extends AbstractEntity {
 
     String logradouro;

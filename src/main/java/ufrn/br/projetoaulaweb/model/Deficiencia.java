@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 import ufrn.br.projetoaulaweb.model.generic.AbstractEntity;
@@ -21,6 +22,7 @@ import java.util.List;
 @Setter
 @ToString
 @Audited
+@AuditTable(value = "deficiencia_aud")
 public class Deficiencia extends AbstractEntity {
     String tipoDeficiencia;
     String descricaoLaudo;

@@ -1,7 +1,7 @@
 package ufrn.br.projetoaulaweb.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ufrn.br.projetoaulaweb.model.Servidor;
-import ufrn.br.projetoaulaweb.repository.generic.GenericRepository;
 
-public interface ServidorRepository extends GenericRepository<Servidor> {
+public interface ServidorRepository extends JpaRepository<Servidor, Long> {
 }

@@ -3,6 +3,7 @@ package ufrn.br.projetoaulaweb.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -12,11 +13,9 @@ import java.util.List;
 @Setter
 @ToString
 @Audited
+@AuditTable(value = "servidor_aud")
 public class Servidor extends PessoaFisica {
 
-    /*
-    @ManyToMany(mappedBy = "servidores")
-    @ToString.Exclude */
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
         name = "servidor_vinculo",
