@@ -15,6 +15,8 @@ import ufrn.br.projetoaulaweb.service.PessoaFisicaService;
 
 import java.util.Optional;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
 @RestController
 @RequestMapping("/pessoafisica")
 public class PessoaFisicaController {
@@ -34,14 +36,34 @@ public class PessoaFisicaController {
 
     @GetMapping
     public ResponseEntity<Page<PessoaFisica>> getAll(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+        Page<PessoaFisica> lista = pessoaFisicaService.findAll(pageable);
+        for (PessoaFisica pf : lista){
+            long id = pf.getId();
+            pf.add(linkTo(PessoaFisicaController.class).slash(id).withSelfRel());
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(lista);
+    }
+
+    /*
+    @GetMapping
+    public ResponseEntity<Page<PessoaFisica>> getAll(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(pessoaFisicaService.findAll(pageable));
     }
+    */
 
     @GetMapping(value = "/{id}")
         public ResponseEntity<PessoaFisica> findById(@PathVariable Long id){
+        Optional<PessoaFisica> pessoaf = pessoaFisicaService.findById(id);
+        pessoaf.get().add(linkTo(PessoaFisicaController.class).slash(id).withSelfRel());
+
+        return new ResponseEntity<PessoaFisica>(pessoaf.get(), HttpStatus.OK);
+
+        /*
         return pessoaFisicaService.findById(id)
                 .map(record -> ResponseEntity.ok().body(record))
                 .orElse(ResponseEntity.notFound().build());
+
+         */
     }
 
     @PutMapping(value = "/{id}")

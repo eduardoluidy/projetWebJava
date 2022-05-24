@@ -1,6 +1,7 @@
 package ufrn.br.projetoaulaweb.model.generic;
 
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class AbstractEntity implements Serializable {
+public abstract class AbstractEntity extends RepresentationModel<AbstractEntity> implements Serializable {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.AUTO)
