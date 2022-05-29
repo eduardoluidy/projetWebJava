@@ -13,11 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PessoaFisicaDto implements Serializable {
+public class PessoaFisicaRequestDto implements Serializable {
 
     String nome;
     String email;
-    String senha;
+    //String senha;
     String telefone;
     String cpf;
     String rg;
