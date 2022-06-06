@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ServidorDto implements Serializable {
+public class ServidorDtoRequest implements Serializable {
     String nome;
     String email;
     String telefone;

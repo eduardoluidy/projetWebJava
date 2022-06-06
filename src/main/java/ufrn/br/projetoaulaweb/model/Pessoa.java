@@ -27,7 +27,6 @@ public abstract class Pessoa extends AbstractEntity {
     String email;
     String telefone;
 
-    //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "pessoa")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     Endereco endereco;

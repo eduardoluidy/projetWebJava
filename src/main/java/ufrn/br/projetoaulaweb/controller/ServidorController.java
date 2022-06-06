@@ -9,10 +9,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import ufrn.br.projetoaulaweb.dtos.ServidorDto;
+import ufrn.br.projetoaulaweb.dtos.PessoaFisicaDtoResponse;
+import ufrn.br.projetoaulaweb.dtos.ServidorDtoRequest;
+import ufrn.br.projetoaulaweb.dtos.ServidorDtoResponse;
+import ufrn.br.projetoaulaweb.model.PessoaFisica;
 import ufrn.br.projetoaulaweb.model.Servidor;
 import ufrn.br.projetoaulaweb.service.ServidorService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,26 +31,41 @@ public class ServidorController {
     }
 
     @PostMapping
-    public ResponseEntity<Servidor> create(@RequestBody ServidorDto servidorDto) {
+    public ResponseEntity<Servidor> create(@RequestBody ServidorDtoRequest servidorDtoRequest) {
         var servidor = new Servidor();
-        BeanUtils.copyProperties(servidorDto, servidor);
+        BeanUtils.copyProperties(servidorDtoRequest, servidor);
         return ResponseEntity.status(HttpStatus.CREATED).body(servidorService.create(servidor));
     }
 
     @GetMapping
-    public ResponseEntity<Page<Servidor>> getAll(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
-        return ResponseEntity.status(HttpStatus.OK).body(servidorService.findAll(pageable));
+    public ResponseEntity<List<ServidorDtoResponse>> getAll(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+        //return ResponseEntity.status(HttpStatus.OK).body(servidorService.findAll(pageable));
+        List<ServidorDtoResponse> servidorDtoResponseList = new ArrayList<>();
+        Page<Servidor> lista = servidorService.findAll(pageable);
+        if (lista.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            for (Servidor servidor : lista){
+                ServidorDtoResponse servidorDtoResponse = new ServidorDtoResponse(servidor);
+                servidorDtoResponseList.add(servidorDtoResponse);
+            }
+            return ResponseEntity.ok().body(servidorDtoResponseList);
+        }
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Servidor> findById(@PathVariable Long id){
-        return servidorService.findById(id)
-                .map(record -> ResponseEntity.ok().body(record))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ServidorDtoResponse> findById(@PathVariable Long id){
+        Optional<Servidor> servidor = servidorService.findById(id);
+        if(servidor.isEmpty()){
+            return ResponseEntity.notFound().build();
+        } else {
+            ServidorDtoResponse servidorDtoResponse = new ServidorDtoResponse(servidor.get());
+            return ResponseEntity.ok().body(servidorDtoResponse);
+        }
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody ServidorDto servidorDto) {
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody ServidorDtoRequest servidorDtoRequest) {
 
         Optional<Servidor> servidorOptional = servidorService.findById(id);
         if (!servidorOptional.isPresent()) {

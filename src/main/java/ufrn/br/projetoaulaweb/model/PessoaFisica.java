@@ -29,8 +29,8 @@ public class PessoaFisica extends Pessoa {
     )
     List<Deficiencia> deficiencias;
 
-    public PessoaFisica(String nome, String email, String telefone, String cpf, String rg, Endereco endereco, List<Deficiencia> deficiencias) {
-        this();
-    }
+    //public PessoaFisica(String nome, String email, String telefone, String cpf, String rg, Endereco endereco, List<Deficiencia> deficiencias) {
+   //     this();
+   // }
 }
 

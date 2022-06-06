@@ -4,7 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ufrn.br.projetoaulaweb.dtos.VinculoDto;
+import ufrn.br.projetoaulaweb.dtos.VinculoDtoRequest;
 import ufrn.br.projetoaulaweb.model.Vinculo;
 import ufrn.br.projetoaulaweb.service.VinculoService;
 
@@ -22,9 +22,9 @@ public class VinculoController {
     }
 
     @PostMapping
-    public ResponseEntity<Vinculo> create(@RequestBody VinculoDto vinculoDto) {
+    public ResponseEntity<Vinculo> create(@RequestBody VinculoDtoRequest vinculoDtoRequest) {
         var vinculo = new Vinculo();
-        BeanUtils.copyProperties(vinculoDto, vinculo);
+        BeanUtils.copyProperties(vinculoDtoRequest, vinculo);
         return ResponseEntity.status(HttpStatus.CREATED).body(vinculoService.create(vinculo));
     }
 
@@ -41,14 +41,14 @@ public class VinculoController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody VinculoDto vinculoDto) {
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody VinculoDtoRequest vinculoDtoRequest) {
 
         Optional<Vinculo> vinculoOptional = vinculoService.findById(id);
         if (!vinculoOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não encontrado.");
         }
         var vinculo = new Vinculo();
-        BeanUtils.copyProperties(vinculoDto, vinculo);
+        BeanUtils.copyProperties(vinculoDtoRequest, vinculo);
         vinculo.setId(vinculoOptional.get().getId());
         return ResponseEntity.status(HttpStatus.OK).body(vinculoService.create(vinculo));
     }

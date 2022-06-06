@@ -17,8 +17,7 @@ import java.io.Serializable;
 @Audited
 @AuditTable(value = "pessoa_juridica_aud")
 public class PessoaJuridica extends Pessoa {
-    @Column(nullable = false, unique = true)
+    //@Column(nullable = false, unique = true)
     String cnpj;
-
 
 }

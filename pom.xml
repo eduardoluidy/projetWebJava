@@ -80,6 +80,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
         </dependency>
+        <!-- auditoria -->
         <!-- hateoas -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -87,18 +88,17 @@
             <version>2.3.1.RELEASE</version>
         </dependency>
         <!-- hateoas -->
-        <!-- auditoria -->
-        <!-- oauth
-        <dependency>
+        <!-- autenticação jwt -->
+          <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-            <version>2.1.5.RELEASE</version>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
         </dependency>
-         oauth -->
+        <!--autenticação jwt -->
     </dependencies>
 
     <build>

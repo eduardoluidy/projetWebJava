@@ -1,9 +1,16 @@
 package ufrn.br.projetoaulaweb.dtos;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class DeficienciaDto implements Serializable {
+@NoArgsConstructor
+@Getter
+@Setter
+public class DeficienciaDtoRequest implements Serializable {
 
     String tipoDeficiencia;
     String descricaoLaudo;
